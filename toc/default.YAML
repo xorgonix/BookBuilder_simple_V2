@@ -1,0 +1,18 @@
+title: "The Silent Horizon"
+voice: "Third Person Limited"
+tone: "Atmospheric, suspenseful"
+chapters:
+  - chapter_number: 1
+    title: "Ashes in the Wind"
+    purpose: "Introduce protagonist and inciting incident"
+    characters: ["Elias", "Mara"]
+    interactions: "Tense dialogue about the missing shipment"
+    wordlength: 1200
+    summary: "Elias discovers the burned warehouse and realizes the guild has been betrayed."
+  - chapter_number: 2
+    title: "Whispers in the Dark"
+    purpose: "Escalate tension and introduce antagonist's shadow"
+    characters: ["Elias", "Kael"]
+    interactions: "Kael warns Elias to stop digging"
+    wordlength: 1500
+    summary: "Elias follows a lead into the lower districts and is ambushed by unknown agents."

@@ -1,0 +1,83 @@
+# skeletons/thriller.yaml
+spec_version: 1
+skeleton_name: "thriller"
+metadata_defaults:
+  genre: "Techno-Thriller"
+  narrative_voice: "Close third-person with tight interiority"
+  tone: "Relentless, paranoid, high-stakes"
+  themes: [ "Surveillance", "Power", "Moral Tradeoffs" ]
+  target_word_count: 90000
+  content_warnings: [ "Violence", "Psychological pressure" ]
+
+genre_guidance:
+  act_structure: [ "Inciting breach", "Escalation & reversals", "Climax & consequence" ]
+  recommended_chapter_purposes:
+  - setup
+  - complication
+  - reversal
+  - reveal
+  - chase
+  - moral choice
+  - showdown
+  - resolution
+  beat_tips:
+  - "Every chapter changes a stake, a goal, or a plan."
+  - "End scenes with unanswered tension, not coy cliffhangers."
+  - "Interleave external pressure with internal cost."
+
+chapter_template:
+  chapter_number: 0
+  title: ""
+  word_count: 3500
+  pov: ""
+  setting: ""
+  purpose: ""
+  summary: ""
+  beats: []
+  arcs_advanced: []
+  non_linear_elements: ""
+  key_props: []
+  safety_notes: ""
+  # optional genre fields
+  genre_fields:
+    thriller:
+      threat_surface: "" # e.g., grid, comms, political, biotech
+      ticking_clock: "" # concrete deadline/constraint
+
+ai_instructions:
+  global_rules:
+  - "Advance plot *and* character in every chapter."
+  - "Prefer crisp verbs and concrete sensory detail."
+  - "Keep exposition embedded in action or conflict."
+  tone_enforcement:
+  - "Avoid jokes unless they underline stress or denial."
+  - "Shorten sentences under acute pressure."
+
+per_chapter_prompt_template: |
+  Write Chapter {{chapter_number}} of "{{title}}".
+  Genre: {{genre}}. Tone: {{tone}}.
+  Narrative voice: {{narrative_voice}}.
+
+  Purpose: {{purpose}}
+  Summary seed: {{summary}}
+
+  POV: {{pov}}
+  Setting: {{setting}}
+  Word target: {{word_count}}
+
+  Stakes & Constraints:
+  - Themes: {{ themes | join(", ") }}
+  - Arcs advanced: {{ arcs_advanced | join("; ") }}
+  - Thriller specifics: threat_surface={{genre_fields.thriller.threat_surface}}, ticking_clock={{genre_fields.thriller.ticking_clock}}
+
+  Instructions:
+  - Open in medias res or with immediate tension.
+  - Embed necessary exposition inside conflict or decision.
+  - Land the last paragraph on changed stakes or a fresh question.
+  - Keep continuity with key props: {{ key_props | join(", ") }}
+
+validators:
+  required_fields: [ "chapter_number", "title", "purpose", "pov", "summary", "beats" ]
+  chapter_number_contiguous: true
+  beats_minimum: 3
+  wordcount_tolerance_pct: 10

@@ -1,0 +1,76 @@
+# skeletons/fantasy.yaml
+spec_version: 1
+skeleton_name: "fantasy"
+metadata_defaults:
+  genre: "Epic Fantasy"
+  narrative_voice: "Third-person limited (rotating POV allowed)"
+  tone: "Mythic, wondrous, perilous"
+  themes: [ "Power and Cost", "Fate vs. Choice", "Found Family" ]
+  target_word_count: 110000
+  content_warnings: [ "Battle harm", "Dark magic" ]
+
+genre_guidance:
+  worldbuilding_principles:
+  - "Reveal the world through action, not encyclopedic dumps."
+  - "Magic systems must have costs and constraints on-stage."
+  recommended_chapter_purposes:
+  - world setup
+  - call to adventure
+  - trial
+  - revelation
+  - betrayal
+  - sacrifice
+  - climax
+  - return
+
+chapter_template:
+  chapter_number: 0
+  title: ""
+  word_count: 4000
+  pov: ""
+  setting: ""
+  purpose: ""
+  summary: ""
+  beats: []
+  arcs_advanced: []
+  non_linear_elements: ""
+  key_props: []
+  genre_fields:
+    fantasy:
+      magic_rules: "" # constraint articulated in this chapter
+      lore_thread: "" # a legend or history reference to seed
+      creature_or_culture: "" # spotlight element to dramatize
+
+ai_instructions:
+  global_rules:
+  - "Anchor every wonder in a character need or choice."
+  - "Demonstrate magic costs; avoid free power."
+  - "Swap exposition for consequence: show what goes wrong."
+  tone_enforcement:
+  - "Use precise, tactile imagery; earn lyrical bursts."
+
+per_chapter_prompt_template: |
+  Write Chapter {{chapter_number}} of "{{title}}".
+  Genre: {{genre}}. Tone: {{tone}}. Voice: {{narrative_voice}}.
+
+  Purpose: {{purpose}}
+  Summary seed: {{summary}}
+
+  POV: {{pov}} | Setting: {{setting}} | Words: {{word_count}}
+  Themes: {{ themes | join(", ") }}
+  Arcs advanced: {{ arcs_advanced | join("; ") }}
+
+  Worldbuilding focus:
+  - Magic rule to dramatize: {{ genre_fields.fantasy.magic_rules }}
+  - Lore thread to seed: {{ genre_fields.fantasy.lore_thread }}
+  - Creature/culture spotlight: {{ genre_fields.fantasy.creature_or_culture }}
+
+  Constraints:
+  - Show magic *cost* on-page.
+  - Keep continuity of props/rituals: {{ key_props | join(", ") }}
+
+validators:
+  required_fields: [ "chapter_number", "title", "purpose", "pov", "summary", "beats" ]
+  beats_minimum: 3
+  enforce_magic_costs: true
+  wordcount_tolerance_pct: 15

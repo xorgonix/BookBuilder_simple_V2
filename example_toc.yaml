@@ -1,0 +1,297 @@
+# =============================================================================
+# EXAMPLE TABLE OF CONTENTS  —  historical fiction
+# "The Vinland Saga": a fictional Norse voyage to North America, c. 1010 CE
+#
+# TEMPLATE VERSION: V2  (current)
+# -----------------------------------------------------------------------------
+# This is the "V2" TOC shape, i.e. the shape the current programs actually read:
+#
+#   * consumed by  builder.py          (the prose generator)
+#   * produced by  toc-maker.py        (the outline generator)
+#
+# V1 (legacy) files in this repo put their book settings under
+# `metadata_defaults:` and their chapter list under `toc:`. builder.py still
+# tolerates that layout as a fallback, but it is the OLD shape. Write new TOCs
+# as V2.
+#
+# HARD REQUIREMENT (builder.py:232-234): the file must be valid YAML and must
+# contain a top-level `chapters` list. That is the ONLY enforced key. Every
+# other key below is optional, and any extra key you add to a chapter is
+# rendered verbatim into the prompt as "Key Name: value" (builder.py:140-143),
+# so you can invent your own fields freely.
+#
+# Everything in this file is free of explicit content and is safe to publish.
+# =============================================================================
+
+spec_version: 2
+skeleton_name: "historical_fiction"
+shape: "V2"
+
+# --- Book-level settings -----------------------------------------------------
+# builder.py reads these three straight off the root (builder.py:113-125).
+title: "The Vinland Saga"
+voice: "Third-person limited, past tense, anchored to one viewpoint per chapter"
+tone: "Grounded, wintry, pragmatic; wonder restrained by hunger and weather"
+genre: "Historical Fiction / Norse Adventure"
+
+premise: >
+  In the autumn of 1009 CE a small Norse trading crew sails west from Greenland
+  on a timber voyage and makes landfall on a coast no map records. What begins as
+  a season of cutting timber becomes a winter of survival among a people whose
+  language, gods and laws are entirely unlike their own. The saga follows the
+  crew from first landfall to the fragile peace they leave behind, told with an
+  eye on the ordinary work of staying alive: rope, salt fish, frostbite, and the
+  long argument over whether to stay.
+
+historical_basis: >
+  Loosely inspired by the Norse voyages to Vinland described in the Vinland
+  Sagas and by the archaeological evidence from L'Anse aux Meadows, Newfoundland
+  (a Norse site dated to approximately 1000 CE). The characters, events and
+  settlement details here are invented. This is fiction, not history.
+
+# Every non-structural key is rendered into the outline prompts by toc-maker.py
+# (format_dynamic_metadata, toc-maker.py:144-163).
+metadata_defaults:
+  narrative_voice: "Third-person limited"
+  tone: "Grounded and wintry"
+  target_word_count: 15000
+  themes:
+    - "Home versus horizon"
+    - "What hospitality costs"
+    - "How strangers become neighbours"
+    - "Survival without conquest"
+  content_warnings:
+    - "Peril at sea"
+    - "Depiction of injuries and frostbite"
+    - "Death of animals for food"
+    - "Period-typical conflict between settlers and Indigenous people"
+
+pacing_structure:
+  - phase: "Departure"
+    chapters: [1, 2, 3]
+  - phase: "Landfall"
+    chapters: [4, 5, 6]
+  - phase: "Winter"
+    chapters: [7, 8, 9]
+  - phase: "Departure Again"
+    chapters: [10]
+
+# Appended verbatim as "AUTHOR GUIDELINES" (builder.py:146-156).
+ai_instructions:
+  global_rules:
+    - "Keep the prose concrete. Prefer rope, tar, salt, wet wool and cold hands to abstract feeling."
+    - "The Norse crew are not heroes and not villains; they are tired professionals far from home."
+    - "Give the Indigenous people their own interiority, competence and agency. Never frame them as scenery, obstacles or a mystery to be solved."
+    - "Nobody speaks modern slang. Avoid anachronism in food, tools, clothing, money and faith."
+    - "Tension comes from weather, scarcity and misunderstanding, not from battle set pieces."
+  tone_enforcement:
+    - "Short declarative sentences during physical work; longer ones only for memory and reflection."
+    - "Let silence and mistranslation do narrative work. Do not explain every custom."
+  historical_accuracy:
+    - "No firearms, no potatoes, no coffee, no horses in Vinland."
+    - "Ships are knarrs and knorrs, clinker-built, powered by sail and oar."
+    - "Time is reckoned in nights, winters and mealtimes, not clock hours."
+
+# --- Chapters (REQUIRED) -----------------------------------------------------
+# The canonical per-chapter fields are:
+#   chapter_number, title, pov, setting, purpose, summary, beats,
+#   arcs_advanced, key_props, word_count, continuity_hooks
+# `beats` is the useful one for pacing: builder.py shows the summary of the
+# previous and next chapter to the model, so summaries should chain cleanly.
+chapters:
+  - chapter_number: 1
+    title: "Timber and Salt"
+    pov: "Hallvard, ship's steward"
+    setting: "Brusand, Greenland; the knarr Salt-Bearer at anchor"
+    purpose: "Establish the crew, the failing timber supply, and the decision to sail west"
+    summary: >
+      Hallvard tallies a warehouse that should not be empty. Greenland's timber
+      has run short again, and Hallvard's foster-father Eirik argues that the
+      old western landfall — the one men call Vinland — is closer than a winter
+      of waiting. Hallvard signs on for a voyage he does not expect to survive.
+    beats:
+      - "Hallvard counts empty timber racks and lies about it to the steward's ledger"
+      - "Eirik produces a water-stained chart he refuses to explain"
+      - "A public argument in the longhouse splits the crew into stayers and goers"
+      - "Hallvard loads salt fish and pitch after dark, choosing the voyage without saying so aloud"
+    arcs_advanced: ["Hallvard's loyalty to Eirik", "The colony's timber crisis"]
+    key_props: ["the steward's ledger", "the water-stained chart", "salt fish in barrels"]
+    word_count: 1500
+    continuity_hooks: ["Eirik has sailed west before and will not discuss it"]
+
+  - chapter_number: 2
+    title: "The Weight of Rope"
+    pov: "Hallvard, ship's steward"
+    setting: "The Western Settlement; the last week before departure"
+    purpose: "Show the cost of leaving and the practical texture of fitting out a knarr"
+    summary: >
+      Hallvard settles debts he cannot pay, and buries a friend who will not be
+      making the voyage. Aboard ship, the crew learns the routines that will
+      keep them alive: who rows, who bails, who sleeps where.
+    beats:
+      - "Hallvard trades his father's knife for a spare rudder pin"
+      - "A launching-yard burial for a man who died of nothing dramatic"
+      - "The crew divides into watches and immediately resents the division"
+      - "Eirik lays out the rules for landfall: no taking, no chasing, no burning"
+    arcs_advanced: ["Hallvard's authority over the crew's stores", "Crew discipline"]
+    key_props: ["a father's knife", "the rudder pin", "wool sleeping sacks"]
+    word_count: 1500
+    continuity_hooks: ["Eirik's three rules are stated publicly and will be tested"]
+
+  - chapter_number: 3
+    title: "Leaving the Known Water"
+    pov: "Hallvard, ship's steward"
+    setting: "Open sea between Greenland and Vinland"
+    purpose: "The passage scene; introduce the strain of confinement and the fog"
+    summary: >
+      Six nights out, the landmarks are gone and the crew's confidence goes with
+      them. Hallvard rations water, breaks up a fight over a sleeping place, and
+      discovers that the ship's youngest hand cannot swim.
+    beats:
+      - "The last headland disappears in fog and the jokes stop"
+      - "A fight over a dry sleeping place is settled by Hallvard giving up his own"
+      - "The boy Ketil admits he cannot swim and Hallvard does not report it"
+      - "Eirik takes a bearing off birds and refuses to say how he knows"
+    arcs_advanced: ["Hallvard's protectiveness of Ketil", "Eirik's secret knowledge"]
+    key_props: ["the water cask", "a bird sighting", "a hand-line for sounding"]
+    word_count: 1500
+    continuity_hooks: ["Hallvard covering for Ketil becomes a debt between them"]
+
+  - chapter_number: 4
+    title: "Landfall"
+    pov: "Hallvard, ship's steward"
+    setting: "A shallow bay patterned with grass and grey rock; later 'the Long Shore'"
+    purpose: "First contact with the land itself; establish the strangeness of plenty"
+    summary: >
+      The Salt-Bearer grounds on a beach where the timber stands so thick it is
+      a problem rather than a prize. While the crew cuts and stacks, they find
+      the remains of a skin tent and a fire pit no older than a few seasons.
+      They are not the first here — and they are not alone.
+    beats:
+      - "Beaching the knarr on a rising tide, and the argument about whether it will float again"
+      - "Cutting timber until hands blister; the discovery that there is too much to carry"
+      - "Hallvard finds a fire pit and a wooden frame that is neither Norse nor broken by weather"
+      - "Eirik orders the camp moved inland off the open beach"
+    arcs_advanced: ["Landfall and the shape of the voyage", "Awareness of prior occupation"]
+    key_props: ["a skin tent frame", "a cold fire pit", "fresh-cut timber stacks"]
+    word_count: 1500
+    continuity_hooks: ["Camp is deliberately moved inland, away from the beach"]
+
+  - chapter_number: 5
+    title: "Salt-Bearer"
+    pov: "Hallvard, ship's steward"
+    setting: "The inland camp; the knarr beached at the Long Shore"
+    purpose: "Practical camp life; a first distant encounter with people"
+    summary: >
+      Hallvard organises stores and discovers the barrels were packed badly in
+      Greenland. Rationing becomes enforcement. On the third morning a line of
+      figures appears on the far shore, watches, and is gone before anyone can
+      decide whether to approach.
+    beats:
+      - "Opening the barrels and finding rot: Hallvard's ledger meets reality"
+      - "A tense meal where the crew realises the winter maths do not work"
+      - "Figures on the far shore at sunrise; the crew's disagreement over waving"
+      - "Eirik forbids pursuit and posts a night watch instead"
+    arcs_advanced: ["Scarcity as a driving force", "Hallvard's growing authority"]
+    key_props: ["rotten barrel staves", "the rationing ledger", "a night watch fire"]
+    word_count: 1500
+    continuity_hooks: ["The watchers on the shore are now a known presence"]
+
+  - chapter_number: 6
+    title: "Two Fires"
+    pov: "Ketil, the youngest hand"
+    setting: "The Long Shore and the inland camp"
+    purpose: "Shift perspective; a small, unforced trade becomes a first meeting"
+    summary: >
+      Sent to gather driftwood, Ketil meets three strangers at a fire of their
+      own and shares his bread because it is the only thing he can think to do.
+      Neither group has a shared language. Both have salt, nets and hands.
+    beats:
+      - "Ketil is sent out alone with a wood-sledge and brief instructions"
+      - "He meets three strangers boiling something he does not recognise"
+      - "The offered bread; the returned fish; the meal eaten in silence"
+      - "Ketil returns late and cannot explain what happened, so Eirik makes him draw it"
+    arcs_advanced: ["Ketil's competence", "First contact on neutral terms"]
+    key_props: ["a wood-sledge", "flatbread", "a fish net", "a charcoal drawing"]
+    word_count: 1500
+    continuity_hooks: ["Ketil's charcoal drawing of the meeting becomes a shared reference"]
+
+  - chapter_number: 7
+    title: "The Long Dark"
+    pov: "Hallvard, ship's steward"
+    setting: "The winter camp, snowbound"
+    purpose: "Midpoint: winter confinement, sickness, and the limits of hospitality"
+    summary: >
+      Winter closes the bay. Two of the crew are sick, the cows are dead and the
+      crew is quarrelling in the dark. The strangers arrive again — this time at
+      the camp, numbering more than before, and Eirik must decide what the rules
+      of hospitality are worth when the stores are nearly gone.
+    beats:
+      - "First snow and the calculation Hallvard refuses to write down"
+      - "The cow dies and the crew's mood curdles with it"
+      - "Strangers at the camp edge, in the middle of the night, in numbers"
+      - "Eirik keeps the door open and rations the guests alongside his own men"
+    arcs_advanced: ["Hospitality against scarcity", "Eirik and Hallvard's first real disagreement"]
+    key_props: ["the last cow", "a door-stone", "frozen water skin"]
+    word_count: 1500
+    continuity_hooks: ["The guests' second visit leaves two of them behind"]
+
+  - chapter_number: 8
+    title: "What the Guests Knew"
+    pov: "Hallvard, ship's steward"
+    setting: "The winter camp"
+    purpose: "The cultural exchange; misunderstanding that turns out to matter"
+    summary: >
+      Two of the strangers stay through the worst of the cold. Working beside
+      them, Hallvard learns how little he understood: the tide tables they had,
+      the fish they did not simply take, the reason the camp was moved inland
+      when Eirik first ordered it. A warning arrives about a third group inland.
+    beats:
+      - "Shared labour: net mending, and a lesson neither man expected to teach"
+      - "Hallvard realises the fire pit at landfall was a signal, not a relic"
+      - "A warning, badly translated, about people further inland"
+      - "Eirik admits the chart came from a previous voyage and points out where it stops"
+    arcs_advanced: ["Hallvard's understanding of the others", "Eirik's confession"]
+    key_props: ["the net", "the chart's blank margin", "a message of knotted cord"]
+    word_count: 1500
+    continuity_hooks: ["The knotted-cord message is not yet understood"]
+
+  - chapter_number: 9
+    title: "The Argument in the Longhouse"
+    pov: "Hallvard, ship's steward"
+    setting: "The winter camp, late winter"
+    purpose: "Climax of the internal conflict: stay or sail"
+    summary: >
+      With the thaw coming, the crew splits: some want a permanent farm, some
+      want to be home before the season turns. Hallvard has to count stores and
+      then say the thing that makes the decision for them. The strangers are
+      asked a question nobody has taught them the words for.
+    beats:
+      - "The stayers make their case with the best timber in the world"
+      - "Hallvard reads out the ledger, plainly, and it ends the argument"
+      - "A hard farewell; gifts are exchanged that neither side can properly name"
+      - "The knotted cord is returned and finally explained, too late to be useful"
+    arcs_advanced: ["The decision to leave", "Hallvard and Eirik's reconciliation"]
+    key_props: ["the ledger", "the knotted cord", "a gift of seasoned wood"]
+    word_count: 1500
+    continuity_hooks: ["Gifts exchanged must be carried home"]
+
+  - chapter_number: 10
+    title: "Homeward Is Not the Same"
+    pov: "Hallvard, ship's steward"
+    setting: "Open sea, then Brusand, Greenland"
+    purpose: "Resolution: what they bring back, and what the ledger will not record"
+    summary: >
+      The Salt-Bearer returns heavy with timber and salt fish and lighter in
+      other ways. Hallvard writes the voyage into the ledger, finds the columns
+      do not fit, and leaves the last page unfinished. The chart goes back in
+      its chest. Someone asks if they will sail west again.
+    beats:
+      - "Landfall at Greenland and the disappointment of a familiar shore"
+      - "Unloading: timber, fish, one ship's boy who can now swim"
+      - "Hallvard attempts the ledger entry and abandons it"
+      - "Somebody asks about another voyage; Eirik says the honest thing, which is 'ask me in a year'"
+    arcs_advanced: ["Hallvard's changed sense of home", "The story's open ending"]
+    key_props: ["the finished ledger", "the returned chart", "seasoned wood"]
+    word_count: 1500
+    continuity_hooks: ["Leave the final page of the ledger blank, deliberately"]

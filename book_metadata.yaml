@@ -1,0 +1,20 @@
+title: "Echoes of the Veil"
+genre: "Dark Fantasy Romance"
+voice: "Lyrical, introspective"
+tone: "Melancholic, tense, sensual"
+premise: "A cursed archivist and a rogue spirit-weaver must unravel a dying city's memories before the veil collapses."
+num_chapters: 8
+pacing_structure:
+  - phase: "Setup"
+    chapters: "1-2"
+  - phase: "Buildup"
+    chapters: "3-5"
+  - phase: "Climax"
+    chapters: "6-7"
+  - phase: "Resolution"
+    chapters: "8"
+fantasy_parameters:
+  - memory_magic: "Fragile, emotion-tied"
+  - veil_thinning: "Progressive environmental decay"
+arousal_arc: "Slow burn → tension → release → aftermath"
+taboo_elements: ["power imbalance", "forbidden knowledge", "spiritual intimacy"]

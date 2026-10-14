@@ -1,0 +1,78 @@
+# skeletons/mystery.yaml
+spec_version: 1
+skeleton_name: "mystery"
+metadata_defaults:
+  genre: "Mystery"
+  narrative_voice: "Close third-person or first-person detective"
+  tone: "Inquisitive, tense, clue-driven"
+  themes: [ "Truth vs. Narrative", "Justice", "Memory" ]
+  target_word_count: 85000
+  content_warnings: [ "Crime scenes", "Deception" ]
+
+genre_guidance:
+  clue_economy:
+  - "Each chapter: plant a clue, a red herring, or a contradiction."
+  - "Track clue provenance and who knows what, when."
+  recommended_chapter_purposes:
+  - crime setup
+  - interview
+  - discovery
+  - misdirection
+  - breakthrough
+  - confrontation
+  - reveal
+  - aftermath
+
+chapter_template:
+  chapter_number: 0
+  title: ""
+  word_count: 3200
+  pov: ""
+  setting: ""
+  purpose: ""
+  summary: ""
+  beats: []
+  arcs_advanced: []
+  non_linear_elements: ""
+  key_props: []
+  genre_fields:
+    mystery:
+      clues: [] # concrete evidences discovered
+      red_herrings: [] # plausible but wrong leads
+      suspects: [] # names + motives
+      questions: [] # explicit questions raised
+
+ai_instructions:
+  global_rules:
+  - "Surface a specific question per chapter; answer it or reframe it."
+  - "Distinguish *observations* from *inferences* on the page."
+  - "Avoid deus ex machina reveals; foreshadow cleanly."
+  tone_enforcement:
+  - "Keep sensory details relevant to inference."
+
+per_chapter_prompt_template: |
+  Write Chapter {{chapter_number}} of "{{title}}".
+  Genre: {{genre}}. Tone: {{tone}}. Voice: {{narrative_voice}}.
+
+  Purpose: {{purpose}}
+  Summary seed: {{summary}}
+
+  POV: {{pov}} | Setting: {{setting}} | Words: {{word_count}}
+  Themes: {{ themes | join(", ") }}
+  Arcs advanced: {{ arcs_advanced | join("; ") }}
+
+  Mystery staging:
+  - Clues to surface: {{ genre_fields.mystery.clues | join("; ") }}
+  - Red herrings to introduce or reinforce: {{ genre_fields.mystery.red_herrings | join("; ") }}
+  - Suspects in play: {{ genre_fields.mystery.suspects | join("; ") }}
+  - Key questions this chapter should raise or resolve: {{ genre_fields.mystery.questions | join("; ") }}
+
+  Constraints:
+  - Keep continuity of key props: {{ key_props | join(", ") }}
+  - Distinguish observations (ground truth) from character inferences.
+
+validators:
+  required_fields: [ "chapter_number", "title", "purpose", "pov", "summary", "beats" ]
+  beats_minimum: 3
+  track_clues: true
+  wordcount_tolerance_pct: 12

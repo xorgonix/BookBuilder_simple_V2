@@ -1,0 +1,75 @@
+# skeletons/educational.yaml
+spec_version: 1
+skeleton_name: "educational"
+metadata_defaults:
+  genre: "Educational Nonfiction"
+  narrative_voice: "Clear instructional, friendly expert"
+  tone: "Encouraging, rigorous, example-driven"
+  themes: [ "Clarity", "Practice", "Transfer of learning" ]
+  target_word_count: 50000
+  content_warnings: []
+
+genre_guidance:
+  pedagogy:
+  - "Each chapter teaches 1-2 core ideas with concrete examples."
+  - "End with exercises and a short recap."
+  - "Use scaffolding: recall → introduce → apply → extend."
+  recommended_chapter_purposes:
+  - setup/key idea
+  - demonstration
+  - guided practice
+  - independent practice
+  - reflection
+  - extension
+
+chapter_template:
+  chapter_number: 0
+  title: ""
+  word_count: 2800
+  pov: "Instructor"
+  setting: ""
+  purpose: ""
+  summary: ""
+  beats: []
+  arcs_advanced: []
+  non_linear_elements: ""
+  key_props: []
+  genre_fields:
+    educational:
+      learning_objectives: [] # measurable outcomes
+      prerequisites: [] # knowledge/skills assumed
+      examples: [] # real examples to include
+      exercises: [] # tasks with difficulty tags
+      assessment: "" # quick self-check or quiz
+
+ai_instructions:
+  global_rules:
+  - "Define measurable learning objectives up front."
+  - "Prefer worked examples before exercises."
+  - "Use plain language; avoid unexplained jargon."
+  tone_enforcement:
+  - "Be warm but concise; chunk complex steps."
+
+per_chapter_prompt_template: |
+  Draft the instructional chapter "{{title}}", Chapter {{chapter_number}} of "{{book_title}}".
+  Voice: {{narrative_voice}}. Tone: {{tone}}. Words: {{word_count}}.
+
+  Purpose: {{purpose}}
+  Summary seed: {{summary}}
+
+  Learning objectives: {{ genre_fields.educational.learning_objectives | join("; ") }}
+  Prerequisites: {{ genre_fields.educational.prerequisites | join("; ") }}
+  Must-include examples: {{ genre_fields.educational.examples | join("; ") }}
+  Exercises to provide: {{ genre_fields.educational.exercises | join("; ") }}
+  Assessment: {{ genre_fields.educational.assessment }}
+
+  Constraints:
+  - Start with a brief hook, then outline objectives.
+  - Include at least one worked example before exercises.
+  - End with recap + quick self-check.
+
+validators:
+  required_fields: [ "chapter_number", "title", "purpose", "summary", "beats" ]
+  learning_objectives_required: true
+  beats_minimum: 3
+  wordcount_tolerance_pct: 12
